@@ -28,8 +28,13 @@
                     SelectedIndexChanged="picker_SelectedIndexChanged" />
 
             <StackLayout Orientation="Horizontal">
-                <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
-                <Button Text="Save" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
+                <Button Text="Cancel" Command="{Binding CancelCommand}"
+                        HorizontalOptions="FillAndExpand" Background="{StaticResource ButtonBrownBrush}">
+                </Button>
+                <Button Text="Save" Command="{Binding SaveCommand}" 
+                        HorizontalOptions="FillAndExpand" Background="{StaticResource ButtonBrownBrush}"> 
+                    
+                </Button>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

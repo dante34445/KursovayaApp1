@@ -53,9 +53,6 @@ namespace App1.Services
             return await Task.FromResult(items);
         }
 
-        public Task AddItemAsync(Category newCategory)
-        {
-            throw new NotImplementedException();
-        }
+   
     }
 }

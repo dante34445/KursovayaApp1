@@ -15,7 +15,6 @@ namespace App1.Views
         public Item Item { get; set; }
 
         private NewItemViewModel _viewModel;
-        private IEnumerable<Category> categories;
         public NewItemPage()
         {
             InitializeComponent();

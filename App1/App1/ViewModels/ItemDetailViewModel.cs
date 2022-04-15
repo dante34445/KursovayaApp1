@@ -12,7 +12,6 @@ namespace App1.ViewModels
         private string itemId;
         private string text;
         private string description;
-        public string Id { get; set; }
 
         public string Text
         {
@@ -44,7 +43,6 @@ namespace App1.ViewModels
             try
             {
                 var item = await DataStore.GetItemAsync(itemId);
-                Id = item.Id;
                 Text = item.Text;
                 Description = item.Description;
             }

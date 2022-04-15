@@ -21,6 +21,10 @@ namespace App1.ViewModels
         public Command AddItemCommand { get; }
         public Command<Category> ItemTapped { get; }
 
+        public Command MoveToTopCommand { protected set; get; }
+        public Command MoveToBottomCommand{ protected set; get; }
+        public Command RemoveCommand { protected set; get; }
+
         public CategoriesViewModel()
         {
             Title = "Browse";
@@ -30,6 +34,10 @@ namespace App1.ViewModels
             ItemTapped = new Command<Category>(OnItemSelected);
 
             AddItemCommand = new Command(OnAddItem);
+
+            MoveToTopCommand = new Command(MoveToTop);
+            MoveToBottomCommand= new Command(MoveToBottom);
+            RemoveCommand = new Command(Remove);
         }
 
         async Task ExecuteLoadItemsCommand()
@@ -81,9 +89,35 @@ namespace App1.ViewModels
             if (item == null)
                 return;
 
-            // This will push the ItemDetailPage onto the navigation stack
-            //await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}" +
-            //    $"={item.Id}");
+            // This will push the CategoryPage onto the navigation stack
+            await Shell.Current.GoToAsync($"{nameof(CategoryPage)}?{nameof(CategoryViewModel.ItemId)}" +
+               $"={item.Id}");
+        }
+
+        private void MoveToTop(object categoryObj)
+        {
+            Category category = categoryObj as Category;
+            if (category == null) return;
+            int oldIndex = Items.IndexOf(category);
+            if (oldIndex > 0)
+                Items.Move(oldIndex, oldIndex - 1);
+        }
+        private void MoveToBottom(object categoryObj)
+        {
+            Category category = categoryObj as Category;
+            if (category == null) return;
+            int oldIndex = Items.IndexOf(category);
+            if (oldIndex < Items.Count - 1)
+                Items.Move(oldIndex, oldIndex + 1);
+        }
+        private void Remove(object categoryObj)
+        {
+            Category category = categoryObj as Category;
+            if (category == null) return;
+
+            DataStoreCategories.DeleteItemAsync(category.Id);
+
+            Items.Remove(category);
         }
     }
 }

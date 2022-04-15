@@ -12,6 +12,5 @@ namespace App1.Services
         Task<bool> DeleteItemAsync(U id);
         Task<T> GetItemAsync(U id);
         Task<IEnumerable<T>> GetItemsAsync(bool forceRefresh = false);
-        Task AddItemAsync(Category newCategory);
     }
 }

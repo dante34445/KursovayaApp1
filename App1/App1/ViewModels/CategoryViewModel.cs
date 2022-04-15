@@ -8,12 +8,14 @@ using App1.Models;
 
 namespace App1.ViewModels
 {
+    [QueryProperty(nameof(ItemId), nameof(ItemId))]
     public class CategoryViewModel : BaseViewModel
     {
+
         public Command SaveCommand { get; }
         public Command CancelCommand { get; }
 
-        private int itemId;
+        private string itemId;
         private string title;
         private string description;
         private float successRate = 50f;
@@ -37,7 +39,7 @@ namespace App1.ViewModels
             set => SetProperty(ref successRate, value);
         }
 
-        public int ItemId
+        public string ItemId
         {
             get
             {
@@ -46,7 +48,7 @@ namespace App1.ViewModels
             set
             {
                 itemId = value;
-                LoadItemId(value);
+                LoadItemId(Int32.Parse(value));
             }
         }
 
@@ -89,7 +91,9 @@ namespace App1.ViewModels
         private async void OnSave()
         {
             var categoriesList = await DataStoreCategories.GetItemsAsync();
-            var curMaxId = categoriesList.Max(x => x.Id);
+            int curMaxId = -1; 
+            if(categoriesList?.Count()>0)
+                curMaxId = categoriesList.Max(x => x.Id);
             Category newCategory = new Category()
             {
                 Id = curMaxId + 1,

@@ -27,6 +27,25 @@
                     </VisualStateGroupList>
                 </Setter>
             </Style>
+            <LinearGradientBrush x:Key="ButtonBrownBrush" StartPoint="0,0" EndPoint="0,0.9">
+                <GradientStop Color="#e9cc89" Offset="0.01" />
+                <GradientStop Color="#bb9946" Offset="0.6" />
+                <GradientStop Color="#cb9743" Offset="1.0" />
+            </LinearGradientBrush>
+
+            <LinearGradientBrush x:Key="ListGreenWhiteRed" StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#66ff99" Offset="0.01" />
+                <GradientStop Color="#ffff" Offset="0.45" />
+                <GradientStop Color="#ffcccc" Offset="0.9" />
+                <GradientStop Color="#ff9999" Offset="1.0" />
+            </LinearGradientBrush>
+
+            <LinearGradientBrush x:Key="ShellBrownBrush" StartPoint="0,0" EndPoint="0,0.9">
+                <GradientStop Color="#e9cc89" Offset="0.01" />
+                <GradientStop Color="#bb9946" Offset="0.6" />
+                <GradientStop Color="#cb9743" Offset="1.0" />
+            </LinearGradientBrush>
+            
         </ResourceDictionary>        
     </Application.Resources>
 </Application>

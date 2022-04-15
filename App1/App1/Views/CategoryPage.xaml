@@ -4,7 +4,7 @@
              x:Class="App1.Views.CategoryPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Title" FontSize="Medium" />
+            <Label Text="Title" FontSize="Medium"  />
             <Entry Text="{Binding Title, Mode=TwoWay}" FontSize="Medium" />
 
             <Label Text="Description" FontSize="Medium" />

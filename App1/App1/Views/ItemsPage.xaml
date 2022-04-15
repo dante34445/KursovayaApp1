@@ -14,49 +14,84 @@
       x:DataType enables compiled bindings for better performance and compile time validation of binding expressions.
       https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/compiled-bindings
     -->
-    <RefreshView x:DataType="local:ItemsViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
-        <CollectionView x:Name="ItemsListView"
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Frame x:Name="backGradient" Background ="{StaticResource ListGreenWhiteRed}"
+               Scale="2.5" AnchorX="0.5" AnchorY="0"/>
+        <RefreshView Grid.Row="0" x:DataType="local:ItemsViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+            <CollectionView x:Name="ItemsListView"
                 ItemsSource="{Binding Items}"
-                SelectionMode="None">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <StackLayout Padding="10" x:DataType="model:Item">
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="{Binding Text}" 
+                SelectionMode="None" >
+                <!--Background="{StaticResource ListGreenWhiteRed}">-->
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="10" x:DataType="model:Item">
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding Text}" 
                             LineBreakMode="NoWrap" 
                             Style="{DynamicResource ListItemTextStyle}" 
                             FontSize="16" />
-                            <Label Text="{Binding Date}" 
+                                <Label Text="{Binding Date}" 
                             LineBreakMode="NoWrap"  TextColor="Black"
                             Style="{DynamicResource ListItemTextStyle}" 
                             FontSize="16" />
-                            <Label Text="       Importance:" 
+                                <Label Text="       Importance:" 
                             LineBreakMode="NoWrap"  TextColor="Chocolate"
                             Style="{DynamicResource ListItemTextStyle}" 
                             FontSize="16" />
-                            <Label Text="{Binding Importance}" 
+                                <Label Text="{Binding Importance}" 
                             LineBreakMode="NoWrap"  TextColor="Brown"
                             Style="{DynamicResource ListItemTextStyle}" 
                             FontSize="16" />
-                        </StackLayout>
-                        <Label Text="{Binding Category}" 
+                            </StackLayout>
+                            <Label Text="{Binding Category}" 
                             LineBreakMode="NoWrap" TextColor="Brown"
                             Style="{DynamicResource ListItemTextStyle}" 
                             FontSize="16" />
-                        <Label Text="{Binding Description}" 
+                            <Label Text="{Binding Description}" 
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemDetailTextStyle}"
                             FontSize="13" />
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer 
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer 
                                 NumberOfTapsRequired="1"
                                 Command="{Binding Source={RelativeSource AncestorType={x:Type local:ItemsViewModel}}, Path=ItemTapped}"		
                                 CommandParameter="{Binding .}">
-                            </TapGestureRecognizer>
-                        </StackLayout.GestureRecognizers>
-                    </StackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </RefreshView>
+                                </TapGestureRecognizer>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+
+        <StackLayout x:Name="SlidingPanelBackground" BackgroundColor="Transparent" InputTransparent="True">
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Tapped="SlidingPanelBackground_Tapped"/>
+
+            </StackLayout.GestureRecognizers>
+        </StackLayout>
+        
+        <StackLayout x:Name="SlidingPanel" BackgroundColor="DarkGray" Padding="15">
+            
+            <StackLayout x:Name="QuickMenu" BackgroundColor="Transparent" Orientation="Horizontal"
+                         HorizontalOptions="Center">
+                <Button Text="1" FontAttributes="Bold" Clicked="QickMenuButton_Clicked"/>
+                <Button Text="2" FontAttributes="Bold" Clicked="QickMenuButton_Clicked"/>
+                <Button Text="3" FontAttributes="Bold" Clicked="QickMenuButton_Clicked"/>
+            </StackLayout>
+            <StackLayout.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Up" Swiped="SwipeGestureRecognizer_OnSwiped"/>
+                <SwipeGestureRecognizer Direction="Down" Swiped="SwipeGestureRecognizer_OnSwiped"/>
+            </StackLayout.GestureRecognizers>
+        </StackLayout>
+        
+        <Button x:Name="FloatingButton" Text ="Button" Grid.Row="0" Clicked="FloatingButton_Clicked" HorizontalOptions="End" VerticalOptions="End" BorderColor="DarkGreen" 
+                BorderWidth="2" BackgroundColor="#11919c"
+                WidthRequest="100" HeightRequest="50" CornerRadius="30" Margin="0,0,10,10"/>
+    </Grid>
 </ContentPage>

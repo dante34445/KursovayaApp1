@@ -18,9 +18,9 @@ namespace App1.Services
                 SuccessRate = 70},
                 new Category { Id = 1, Title = "Work", Description="Work description.",
                 SuccessRate = 70},
-                new Category { Id = 1, Title = "Store", Description="Store description.",
+                new Category { Id = 2, Title = "Store", Description="Store description.",
                 SuccessRate = 70},
-                new Category { Id = 1, Title = "Learning", Description="Learning description.",
+                new Category { Id = 3, Title = "Learning", Description="Learning description.",
                 SuccessRate = 70}
 
             };
@@ -60,9 +60,6 @@ namespace App1.Services
             return await Task.FromResult(items);
         }
 
-        Task IDataStore<Category, int>.AddItemAsync(Category newCategory)
-        {
-            throw new NotImplementedException();
-        }
+   
     }
 }
